@@ -8,6 +8,10 @@ module.exports=function(sequelize,DataTypes){
 		respuesta: {
 					type: DataTypes.STRING,
 					validate: {notEmpty: {msg:"Respuesta es requerido"}}
-					}
+					},
+		tema:  {
+				type: DataTypes.STRING,
+				validate:{ notEmpty:{msg: "Campo requerido"}}
+				}
 	});
 }

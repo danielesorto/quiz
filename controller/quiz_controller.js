@@ -49,7 +49,7 @@ exports.answer=function(req,res){
 exports.new=function(req,res){
 	
 	var quiz=models.Quiz.build(	//Crea objeto quiz NO persistente
-			{pregunta: "Pregunta", respuesta: "Respuesta"}
+			{pregunta: "Pregunta", respuesta: "Respuesta",tema: "otro"}
 		);
 	
 
@@ -65,7 +65,7 @@ exports.create=function(req,res){
 		res.render('quizes/new',{quiz: quiz,errors: err.errors});
 		}else{
 			//Guardar en la BD
-		quiz.save({fields: ["pregunta","respuesta"]})
+		quiz.save({fields: ["pregunta","respuesta","tema"]})
 		.then(function(){ res.redirect('/quizes')})		
 		}
 	});
@@ -79,6 +79,7 @@ exports.edit=function(req,res){
 exports.update=function(req,res){
 	req.quiz.pregunta=req.body.quiz.pregunta;
 	req.quiz.respuesta=req.body.quiz.respuesta;
+	req.quiz.tema=req.body.quiz.tema;
 	req.quiz
 	.validate()
 	.then(
@@ -87,7 +88,7 @@ exports.update=function(req,res){
 				res.render('quizes/edit',{quiz: req.quiz,errors: err.errors});
 			}else{
 				req.quiz
-				.save({fields: ["pregunta","respuesta"]})
+				.save({fields: ["pregunta","respuesta","tema"]})
 				.then( function(){ res.redirect('/quizes');});
 			}
 		}
